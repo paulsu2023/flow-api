@@ -44,7 +44,8 @@ class FlowClient:
         self.db = db  # Database instance for captcha config
         self.labs_base_url = config.flow_labs_base_url  # https://labs.google/fx/api
         self.api_base_url = config.flow_api_base_url    # https://aisandbox-pa.googleapis.com/v1
-        self.timeout = config.flow_timeout
+        # 强制基础网络超时至少为 300 秒，防止 Veo I2V 高清等长耗时接口由于 120s 默认限制而触发 curl 28 报错断联
+        self.timeout = max(300, config.flow_timeout or 300)
         # 缓存每个账号的 User-Agent
         self._user_agent_cache = {}
         # 当前请求链路绑定的浏览器指纹（基于 contextvar，避免并发串扰）
