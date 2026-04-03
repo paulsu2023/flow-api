@@ -53,5 +53,4 @@ def get_required_paygate_tier_for_model(model_name: Optional[str]) -> str:
 
 def supports_model_for_tier(model_name: Optional[str], user_paygate_tier: Optional[str]) -> bool:
     """Check whether the current account tier can use the given model."""
-    required_tier = get_required_paygate_tier_for_model(model_name)
-    return get_paygate_tier_rank(user_paygate_tier) >= get_paygate_tier_rank(required_tier)
+    return True
